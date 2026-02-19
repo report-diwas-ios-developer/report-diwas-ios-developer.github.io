@@ -2,127 +2,269 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>report.diwas | iOS App & Game Developer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>report.diwas</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
+        :root {
+            --primary: #cc0055;
+            --primary-dark: #a30044;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #f7f7f7;
+        }
 
-}
+        * {
+            box-sizing: border-box;
+        }
 
-/* Utility Class */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background: #ffffff;
+        }
 
-/* Header/Navigation */
-header {
-    background: #ffffff;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    position: sticky; /* Sticky header for navigation */
-    top: 0;
-    z-index: 1000;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-header h1 {
-    font-size: 1.5em;
-    color: #cc0055; /* NEW Primary color: Deep Pink for creative/game dev feel */
-    margin: 0;
-}
+        /* ================= NAVBAR ================= */
+        header {
+            background: #ffffff;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-header nav a {
-    text-decoration: none;
-    color: #555;
-    margin-left: 20px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-header nav a:hover {
-    color: #cc0055;
-}
+        .logo {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-/* Hero Section (The Main Focus) */
-.hero {
-    background-color: #ffffff;
-    padding: 100px 0;
-    text-align: center;
-}
+        nav a {
+            text-decoration: none;
+            margin-left: 25px;
+            color: var(--gray);
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-.hero h2 {
-    font-size: 3.5em;
-    margin-bottom: 15px;
-    line-height: 1.2;
-    color: #1a1a1a;
-}
+        nav a:hover {
+            color: var(--primary);
+        }
 
-.hero h2 strong {
-    color: #cc0055;
-    font-weight: 700;
-}
+        /* ================= HERO ================= */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #fff5f9 100%);
+        }
 
-.hero p {
-    font-size: 1.25em;
-    color: #666;
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
 
-/* Call to Action Button */
-.cta-button {
-    display: inline-block;
-    background-color: #cc0055;
-    color: white;
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
+        .hero span {
+            color: var(--primary);
+        }
 
-.cta-button:hover {
-    background-color: #a30044;
-}
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
 
-/* Smooth scrolling for anchor links */
-html {
-    scroll-behavior: smooth;
-}
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ================= APPS SECTION ================= */
+        .apps {
+            padding: 100px 0;
+            background: var(--light-gray);
+            text-align: center;
+        }
+
+        .apps h2 {
+            margin-bottom: 60px;
+            font-size: 2.2rem;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .app-card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .app-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .app-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ================= CONTACT ================= */
+        .contact {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+
+        /* ================= MOBILE ================= */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- NAVIGATION -->
     <header>
         <div class="container">
-            <h1>report.diwas</h1>
+            <div class="logo">report.diwas</div>
+            <nav>
+                <a href="#apps">Apps</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <main class="hero">
+    <!-- HERO -->
+    <section class="hero">
         <div class="container">
-            <h2>I create game and apps for iOS.</h2>
-            <p>You can browse all my apps and games published on Apple App by visiting the link below.</p>
-            <a href="https://apps.apple.com/developer/bishal-shrestha/id1862422042" class="cta-button">Available on Apple App Store</a>
+            <h1>I build <span>iOS apps & games</span></h1>
+            <p>
+                Independent developer creating fun, simple and useful apps for iPhone and iPad.
+                Explore all published apps on the App Store.
+            </p>
+            <a href="https://apps.apple.com/developer/bishal-shrestha/id1862422042" class="btn">
+                View on Apple App Store
+            </a>
         </div>
+    </section>
 
+    <!-- APPS SECTION -->
+    <!-- <section class="apps" id="apps">
         <div class="container">
-            <h2>Contact info</h2>
-            <p>If you need any support regarding any of my app or game you can send me email directly.</p>
-            <a href="mailto:report.diwas@gmail.com" class="cta-button">Send email</a>
+            <h2>Published Apps</h2>
+
+            <div class="app-grid">
+                <div class="app-card">
+                    <h3>Games</h3>
+                    <p>Fun and engaging mobile games built for smooth performance and simple gameplay.</p>
+                </div>
+
+                <div class="app-card">
+                    <h3>Utility Apps</h3>
+                    <p>Lightweight tools designed to solve real everyday problems efficiently.</p>
+                </div>
+
+                <div class="app-card">
+                    <h3>More Coming Soon</h3>
+                    <p>Continuously building and improving new apps and experiences.</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section> -->
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-card">
+                <h2>Need Support?</h2>
+                <p>
+                    If you need help or have questions about any app,
+                    feel free to contact me directly.
+                </p>
+                <a href="mailto:report.diwas@gmail.com" class="btn">
+                    Send Email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 report.diwas — All rights reserved.
+    </footer>
+
 </body>
 </html>
-
