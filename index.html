@@ -1,270 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>report.diwas | iOS App & Game Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>report.diwas — iOS Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f2ede6;
+      --rose: #d63060;
+      --rose-dark: #a8234a;
+      --muted: #7a6f65;
+      --accent-bg: #1a1410;
+    }
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <style>
-        :root {
-            --primary: #cc0055;
-            --primary-dark: #a30044;
-            --dark: #1a1a1a;
-            --gray: #666;
-            --light-gray: #f7f7f7;
-        }
+    html { scroll-behavior: smooth; }
 
-        * {
-            box-sizing: border-box;
-        }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            background: #ffffff;
-        }
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.45;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--paper);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
 
-        /* ================= NAVBAR ================= */
-        header {
-            background: #ffffff;
-            padding: 18px 0;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    .logo span { color: var(--rose); }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 32px;
+      transition: color 0.2s;
+    }
 
-        .logo {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--primary);
-        }
+    nav a:hover { color: var(--rose); }
 
-        nav a {
-            text-decoration: none;
-            margin-left: 25px;
-            color: var(--gray);
-            font-weight: 500;
-            transition: 0.3s;
-        }
+    /* ── Hero ── */
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+    .hero-left {
+      padding: 100px 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
 
-        /* ================= HERO ================= */
-        .hero {
-            padding: 120px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #fff 0%, #fff5f9 100%);
-        }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: rgba(0,0,0,0.1);
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .hero span {
-            color: var(--primary);
-        }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--rose);
+    }
 
-        .hero p {
-            max-width: 650px;
-            margin: 0 auto 40px;
-            font-size: 1.2rem;
-            color: var(--gray);
-        }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+      color: var(--ink);
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 14px 30px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
 
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 52px;
+      font-weight: 300;
+    }
 
-        /* ================= APPS SECTION ================= */
-        .apps {
-            padding: 100px 0;
-            background: var(--light-gray);
-            text-align: center;
-        }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rose);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      padding: 16px 28px;
+      border-radius: 4px;
+      transition: background 0.25s, transform 0.2s;
+      align-self: flex-start;
+    }
 
-        .apps h2 {
-            margin-bottom: 60px;
-            font-size: 2.2rem;
-        }
+    .btn-primary:hover {
+      background: var(--rose-dark);
+      transform: translateY(-2px);
+    }
 
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-        }
+    .btn-primary svg { flex-shrink: 0; }
 
-        .app-card {
-            background: white;
-            padding: 30px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
+    /* ── Hero right panel ── */
+    .hero-right {
+      background: var(--accent-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
+    .hero-right::before {
+      content: 'APPS';
+      position: absolute;
+      bottom: -30px;
+      right: -20px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 10rem;
+      color: rgba(255,255,255,0.025);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
 
-        .app-card h3 {
-            margin-bottom: 10px;
-        }
+    .app-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 40px;
+    }
 
-        .app-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
+    .app-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-        /* ================= CONTACT ================= */
-        .contact {
-            padding: 100px 0;
-            text-align: center;
-        }
+    .app-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.25s, background 0.25s;
+    }
 
-        .contact-card {
-            background: #ffffff;
-            padding: 50px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    .app-item:hover {
+      border-color: rgba(214, 48, 96, 0.4);
+      background: rgba(214, 48, 96, 0.05);
+    }
 
-        .contact-card p {
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
+    .app-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
 
-        /* ================= FOOTER ================= */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #999;
-            border-top: 1px solid #eee;
-        }
+    .app-icon.purple { background: linear-gradient(135deg, #6e40c9, #a855f7); }
+    .app-icon.teal   { background: linear-gradient(135deg, #0f766e, #2dd4bf); }
+    .app-icon.amber  { background: linear-gradient(135deg, #b45309, #fbbf24); }
 
-        /* ================= MOBILE ================= */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+    .app-info h3 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #f0ebe3;
+      margin-bottom: 4px;
+    }
 
-            nav {
-                display: none;
-            }
-        }
+    .app-info p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+    }
 
-    </style>
+    .store-link {
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      color: var(--rose);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(214, 48, 96, 0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      align-self: flex-start;
+    }
+
+    .store-link:hover {
+      color: #f06090;
+      border-color: rgba(240, 96, 144, 0.6);
+    }
+
+    /* ── Support section ── */
+    .support {
+      background: var(--ink);
+      padding: 100px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .support-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--paper);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .support-text h2 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .support-text p {
+      color: rgba(242, 237, 230, 0.5);
+      font-size: 1rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .support-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .mono-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(242, 237, 230, 0.3);
+    }
+
+    .email-display {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--paper);
+      font-style: italic;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--rose);
+      color: var(--rose);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      padding: 14px 26px;
+      border-radius: 4px;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+
+    .btn-ghost:hover {
+      background: var(--rose);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .logo {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+    }
+
+    footer .logo span { color: var(--rose); opacity: 0.7; }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Animations ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.18s; }
+    .fade-up:nth-child(3) { animation-delay: 0.3s; }
+    .fade-up:nth-child(4) { animation-delay: 0.42s; }
+    .fade-up:nth-child(5) { animation-delay: 0.52s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      header { padding: 18px 24px; }
+      nav { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 70px 24px 50px;
+      }
+
+      .hero-left::after { display: none; }
+
+      .hero-right {
+        padding: 50px 24px;
+      }
+
+      .support {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 70px 24px;
+      }
+
+      footer {
+        padding: 28px 24px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <header>
-        <div class="container">
-            <div class="logo">report.diwas</div>
-            <nav>
-                <a href="#apps">Apps</a>
-                <a href="#contact">Contact</a>
-            </nav>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">report<span>.</span>diwas</div>
+    <nav>
+      <a href="#apps">Apps</a>
+      <a href="#support">Support</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="apps">
+
+    <div class="hero-left">
+      <div class="eyebrow fade-up">Independent iOS Developer</div>
+      <h1 class="fade-up">Apps built with<br><em>care & craft.</em></h1>
+      <p class="hero-desc fade-up">
+        I'm Bishal — a solo developer making small, thoughtful apps for iPhone and iPad.
+        No bloat, no noise. Just tools and games that feel right.
+      </p>
+      <a href="https://apps.apple.com/developer/bishal-shrestha/id1862422042" class="btn-primary fade-up">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c0 2.5.5 4 2 4s2-1.5 2-4"/></svg>
+        View on App Store
+      </a>
+    </div>
+
+    <div class="hero-right" id="apps">
+      <div class="app-label">Published Apps</div>
+      <div class="app-list">
+        <div class="app-item fade-up">
+          <div class="app-icon purple">🎮</div>
+          <div class="app-info">
+            <h3>Games</h3>
+            <p>Casual and arcade games designed for quick, satisfying sessions.</p>
+          </div>
         </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero">
-        <div class="container">
-            <h1>I build <span>iOS apps & games</span></h1>
-            <p>
-                Independent developer creating fun, simple and useful apps for iPhone and iPad.
-                Explore all published apps on the App Store.
-            </p>
-            <a href="https://apps.apple.com/developer/bishal-shrestha/id1862422042" class="btn">
-                View on Apple App Store
-            </a>
+        <div class="app-item fade-up">
+          <div class="app-icon teal">🛠</div>
+          <div class="app-info">
+            <h3>Utilities</h3>
+            <p>Focused tools that do one thing well — simple, fast, no fuss.</p>
+          </div>
         </div>
-    </section>
-
-    <!-- APPS SECTION -->
-    <!-- <section class="apps" id="apps">
-        <div class="container">
-            <h2>Published Apps</h2>
-
-            <div class="app-grid">
-                <div class="app-card">
-                    <h3>Games</h3>
-                    <p>Fun and engaging mobile games built for smooth performance and simple gameplay.</p>
-                </div>
-
-                <div class="app-card">
-                    <h3>Utility Apps</h3>
-                    <p>Lightweight tools designed to solve real everyday problems efficiently.</p>
-                </div>
-
-                <div class="app-card">
-                    <h3>More Coming Soon</h3>
-                    <p>Continuously building and improving new apps and experiences.</p>
-                </div>
-            </div>
+        <div class="app-item fade-up">
+          <div class="app-icon amber">✨</div>
+          <div class="app-info">
+            <h3>More coming</h3>
+            <p>New ideas in progress. Always building something new.</p>
+          </div>
         </div>
-    </section> -->
+      </div>
+      <a href="https://apps.apple.com/developer/bishal-shrestha/id1862422042" class="store-link">
+        Browse all on App Store →
+      </a>
+    </div>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-card">
-                <h2>Need Support?</h2>
-                <p>
-                    If you need help or have questions about any app,
-                    feel free to contact me directly.
-                </p>
-                <a href="mailto:report.diwas@gmail.com" class="btn">
-                    Send Email
-                </a>
-            </div>
-        </div>
-    </section>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-        © 2026 report.diwas — All rights reserved.
-    </footer>
+  <!-- SUPPORT -->
+  <section class="support" id="support">
+    <div class="support-text">
+      <h2>Questions about<br>an <em>app?</em></h2>
+      <p>
+        Having trouble, spotted a bug, or just want to say hi?
+        I read every message personally and try to respond quickly.
+        No support bots here — just a real human who built the app.
+      </p>
+    </div>
+    <div class="support-action">
+      <span class="mono-tag">Get in touch</span>
+      <div class="email-display">report.diwas@gmail.com</div>
+      <a href="mailto:report.diwas@gmail.com" class="btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Send a message
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">report<span>.</span>diwas</div>
+    <p>© 2026 — All rights reserved</p>
+  </footer>
 
 </body>
 </html>
